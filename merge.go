@@ -191,7 +191,6 @@ func deepMerge(dst, src reflect.Value, visited map[uintptr]*visit, depth int, co
 								return
 							}
 						}
-
 					} else if sliceDeepMerge {
 						if srcSlice.Len() > dstSlice.Len() {
 							newSlice := reflect.MakeSlice(srcSlice.Type(), srcSlice.Len(), srcSlice.Len())
@@ -294,9 +293,8 @@ func deepMerge(dst, src reflect.Value, visited map[uintptr]*visit, depth int, co
 				} else {
 					if err = deepMerge(dstElem, srcElem, visited, depth+1, config); err != nil {
 						return
-					} else {
-						dst.Index(i).Set(dstElem)
 					}
+					dst.Index(i).Set(dstElem)
 				}
 			}
 		}
