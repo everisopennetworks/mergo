@@ -115,6 +115,109 @@ func TestDeleteNilElement(t *testing.T) {
 				},
 			},
 		},
+		{
+			map[string]interface{}{
+				"/ManagedElement=DU-01/GNBDUFunction=0/NRCellDU=3": map[string]interface{}{
+					"body": map[string]interface{}{
+						"NRCellDU": []interface{}{
+							nil,
+							nil,
+							nil,
+							map[string]interface{}{
+								"id": 3,
+								"attributes": map[string]interface{}{
+									"SystemInformationBlocks": map[string]interface{}{
+										"sib1": map[string]interface{}{
+											"uac-BarringInfo": map[string]interface{}{
+												"uac-BarringForCommon": []interface{}{
+													nil,
+													nil,
+													nil,
+													nil,
+													nil,
+													map[string]interface{}{
+														"uac-barringInfoSetIndex": nil,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			map[string]interface{}{
+				"/ManagedElement=DU-01/GNBDUFunction=0/NRCellDU=3": map[string]interface{}{
+					"body": map[string]interface{}{
+						"NRCellDU": []interface{}{
+							nil,
+							nil,
+							nil,
+							map[string]interface{}{
+								"id": 3,
+								"attributes": map[string]interface{}{
+									"SystemInformationBlocks": map[string]interface{}{
+										"sib1": map[string]interface{}{
+											"uac-BarringInfo": map[string]interface{}{
+												"uac-BarringForCommon": []interface{}{
+													nil,
+													nil,
+													nil,
+													nil,
+													nil,
+													map[string]interface{}{
+														"accessCategory": 5,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Config{
+				sliceDeepMerge: true,
+				Overwrite:      false,
+			},
+			map[string]interface{}{
+				"/ManagedElement=DU-01/GNBDUFunction=0/NRCellDU=3": map[string]interface{}{
+					"body": map[string]interface{}{
+						"NRCellDU": []interface{}{
+							nil,
+							nil,
+							nil,
+							map[string]interface{}{
+								"id": 3,
+								"attributes": map[string]interface{}{
+									"SystemInformationBlocks": map[string]interface{}{
+										"sib1": map[string]interface{}{
+											"uac-BarringInfo": map[string]interface{}{
+												"uac-BarringForCommon": []interface{}{
+													nil,
+													nil,
+													nil,
+													nil,
+													nil,
+													map[string]interface{}{
+														"accessCategory":          5,
+														"uac-barringInfoSetIndex": nil,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	for i, test := range tests {
 		err := Merge(&test.dst, test.src, func(c2 *Config) {
